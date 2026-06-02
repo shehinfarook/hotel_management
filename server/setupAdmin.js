@@ -22,7 +22,7 @@ const setup = async () => {
     })
 
     const restaurant = await Restaurant.create({
-      name: 'My Restaurant',
+      name: 'Restaurant',
       address: '',
       phone: ''
     })
@@ -38,7 +38,6 @@ const setup = async () => {
     console.log('Done!')
     console.log('Super Admin: superadmin123@gmail.com / admin123')
     console.log('Admin:       admin123@gmail.com / admin123')
-    console.log('Restaurant:  My Restaurant (update name from super admin panel)')
     process.exit(0)
   } catch (err) {
     console.error(err)
