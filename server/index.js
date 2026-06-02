@@ -9,6 +9,10 @@ connect()
 app.use(cors())
 app.use(express.json())
 
+app.get('/', (req, res) => {
+  res.send('Hotel Management API is running ')
+})
+
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/menu', require('./routes/menu'))
 app.use('/api/orders', require('./routes/orders'))
