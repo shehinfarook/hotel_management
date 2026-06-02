@@ -11,7 +11,10 @@ const AdminMenu = () => {
   const [editing, setEditing] = useState(null)
   const [msg, setMsg] = useState('')
 
-  const load = () => api.get(`/menu?restaurantId=${user.restaurantId}`).then(({ data }) => setItems(data))
+  const load = () => {
+    const query = user.restaurantId ? `?restaurantId=${user.restaurantId}` : ''
+    api.get(`/menu${query}`).then(({ data }) => setItems(data))
+  }
   useEffect(() => { load() }, [])
 
   const handleSubmit = async (e) => {
@@ -75,7 +78,7 @@ const AdminMenu = () => {
             <tr key={item._id}>
               <td>{item.name}</td>
               <td>{item.category}</td>
-              <td>${item.price}</td>
+              <td>₹{item.price}</td>
               <td>{item.available ? '✅' : '❌'}</td>
               <td>
                 <button className="btn-sm" onClick={() => handleEdit(item)}>Edit</button>

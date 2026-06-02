@@ -30,6 +30,7 @@ const MenuPage = () => {
         ))}
       </div>
       <div className="menu-grid">
+        {filtered.length === 0 && <p style={{color:'#888'}}>No menu items available yet.</p>}
         {filtered.map((item) => (
           <div key={item._id} className={`menu-card ${!item.available ? 'unavailable' : ''}`}>
             {item.image && <img src={item.image} alt={item.name} />}

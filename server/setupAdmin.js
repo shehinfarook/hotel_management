@@ -2,16 +2,18 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const User = require('./models/User')
+const Restaurant = require('./models/Restaurant')
 
-const seed = async () => {
+const setup = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI)
     console.log('Connected to MongoDB')
 
     await User.deleteMany({ role: { $in: ['superadmin', 'admin'] } })
+    await Restaurant.deleteMany({})
 
     const hashed = await bcrypt.hash('admin123', 10)
-    
+
     await User.create({
       name: 'superadmin',
       email: 'superadmin123@gmail.com',
@@ -19,14 +21,24 @@ const seed = async () => {
       role: 'superadmin'
     })
 
+    const restaurant = await Restaurant.create({
+      name: 'My Restaurant',
+      address: '',
+      phone: ''
+    })
+
     await User.create({
       name: 'admin',
       email: 'admin123@gmail.com',
       password: hashed,
-      role: 'admin'
+      role: 'admin',
+      restaurantId: restaurant._id
     })
 
-
+    console.log('Done!')
+    console.log('Super Admin: superadmin123@gmail.com / admin123')
+    console.log('Admin:       admin123@gmail.com / admin123')
+    console.log('Restaurant:  My Restaurant (update name from super admin panel)')
     process.exit(0)
   } catch (err) {
     console.error(err)
@@ -34,4 +46,4 @@ const seed = async () => {
   }
 }
 
-seed()
+setup()
