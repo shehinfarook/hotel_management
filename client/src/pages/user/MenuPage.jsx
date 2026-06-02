@@ -9,7 +9,7 @@ const MenuPage = () => {
   const { addToCart } = useContext(CartContext)
 
   useEffect(() => {
-    api.get('/menu').then(({ data }) => setItems(data))
+    api.get('/api/menu').then(({ data }) => setItems(data))
   }, [])
 
   const categories = ['All', ...new Set(items.map((i) => i.category))]

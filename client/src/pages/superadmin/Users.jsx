@@ -8,16 +8,16 @@ const Users = () => {
   const [msg, setMsg] = useState('')
 
   useEffect(() => {
-    api.get('/super/users').then(({ data }) => setUsers(data))
-    api.get('/super/restaurants').then(({ data }) => setRestaurants(data))
+    api.get('/api/super/users').then(({ data }) => setUsers(data))
+    api.get('/api/super/restaurants').then(({ data }) => setRestaurants(data))
   }, [])
 
   const assignAdmin = async (e) => {
     e.preventDefault()
     try {
-      await api.post('/super/assign-admin', selected)
+      await api.post('/api/super/assign-admin', selected)
       setMsg('Admin assigned!')
-      api.get('/super/users').then(({ data }) => setUsers(data))
+      api.get('/api/super/users').then(({ data }) => setUsers(data))
     } catch (err) {
       setMsg(err.response?.data?.message || 'Error')
     }

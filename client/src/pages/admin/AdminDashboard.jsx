@@ -5,7 +5,7 @@ const AdminDashboard = () => {
   const [stats, setStats] = useState({ orders: 0, pending: 0, revenue: 0, menu: 0 })
 
   useEffect(() => {
-    Promise.all([api.get('/orders/restaurant'), api.get('/menu')]).then(([ordersRes, menuRes]) => {
+    Promise.all([api.get('/api/orders/restaurant'), api.get('/api/menu')]).then(([ordersRes, menuRes]) => {
       const orders = ordersRes.data
       const revenue = orders
         .filter((o) => o.status === 'delivered')

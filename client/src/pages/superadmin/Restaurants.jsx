@@ -9,16 +9,16 @@ const Restaurants = () => {
   const [editing, setEditing] = useState(null)
   const [msg, setMsg] = useState('')
 
-  const load = () => api.get('/super/restaurants').then(({ data }) => setRestaurants(data))
+  const load = () => api.get('/api/super/restaurants').then(({ data }) => setRestaurants(data))
   useEffect(() => { load() }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       if (editing) {
-        await api.put(`/super/restaurants/${editing}`, form)
+        await api.put(`/api/super/restaurants/${editing}`, form)
       } else {
-        await api.post('/super/restaurants', form)
+        await api.post('/api/super/restaurants', form)
       }
       setForm(blank)
       setEditing(null)
@@ -36,7 +36,7 @@ const Restaurants = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete restaurant?')) return
-    await api.delete(`/super/restaurants/${id}`)
+    await api.delete(`/api/super/restaurants/${id}`)
     load()
   }
 

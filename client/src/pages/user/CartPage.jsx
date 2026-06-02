@@ -13,7 +13,7 @@ const CartPage = () => {
     if (!cart.length) return
     try {
       const restaurantId = cart[0].restaurantId
-      await api.post('/orders', { items: cart, restaurantId, note })
+      await api.post('/api/orders', { items: cart, restaurantId, note })
       clearCart()
       setMsg('Order placed!')
       setTimeout(() => navigate('/orders'), 1500)

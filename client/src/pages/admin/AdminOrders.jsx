@@ -13,7 +13,7 @@ const AdminOrders = () => {
   const [orders, setOrders] = useState([])
   const [filter, setFilter] = useState('all')
 
-  const load = () => api.get('/orders/restaurant').then(({ data }) => setOrders(data))
+  const load = () => api.get('/api/orders/restaurant').then(({ data }) => setOrders(data))
 
   useEffect(() => {
     load()
@@ -22,13 +22,13 @@ const AdminOrders = () => {
   }, [])
 
   const advance = async (id, status) => {
-    await api.put(`/orders/${id}/status`, { status })
+    await api.put(`/api/orders/${id}/status`, { status })
     load()
   }
 
   const cancel = async (id) => {
     if (!window.confirm('Cancel this order?')) return
-    await api.put(`/orders/${id}/status`, { status: 'cancelled' })
+    await api.put(`/api/orders/${id}/status`, { status: 'cancelled' })
     load()
   }
 

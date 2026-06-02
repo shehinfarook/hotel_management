@@ -6,9 +6,9 @@ const SuperDashboard = () => {
 
   useEffect(() => {
     Promise.all([
-      api.get('/super/restaurants'),
-      api.get('/super/users'),
-      api.get('/orders/all')
+      api.get('/api/super/restaurants'),
+      api.get('/api/super/users'),
+      api.get('/api/orders/all')
     ]).then(([rRes, uRes, oRes]) => {
       const revenue = oRes.data
         .filter((o) => o.status === 'delivered')

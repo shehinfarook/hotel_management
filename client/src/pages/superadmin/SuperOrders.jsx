@@ -7,7 +7,7 @@ const SuperOrders = () => {
   const [filter, setFilter] = useState('all')
 
   useEffect(() => {
-    api.get('/orders/all').then(({ data }) => setOrders(data))
+    api.get('/api/orders/all').then(({ data }) => setOrders(data))
   }, [])
 
   const filtered = filter === 'all' ? orders : orders.filter((o) => o.status === filter)

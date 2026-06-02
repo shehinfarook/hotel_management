@@ -13,7 +13,7 @@ const AdminMenu = () => {
 
   const load = () => {
     const query = user.restaurantId ? `?restaurantId=${user.restaurantId}` : ''
-    api.get(`/menu${query}`).then(({ data }) => setItems(data))
+    api.get(`/api/menu${query}`).then(({ data }) => setItems(data))
   }
   useEffect(() => { load() }, [])
 
@@ -21,9 +21,9 @@ const AdminMenu = () => {
     e.preventDefault()
     try {
       if (editing) {
-        await api.put(`/menu/${editing}`, form)
+        await api.put(`/api/menu/${editing}`, form)
       } else {
-        await api.post('/menu', form)
+        await api.post('/api/menu', form)
       }
       setForm(blank)
       setEditing(null)
@@ -41,7 +41,7 @@ const AdminMenu = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this item?')) return
-    await api.delete(`/menu/${id}`)
+    await api.delete(`/api/menu/${id}`)
     load()
   }
 
@@ -56,7 +56,7 @@ const AdminMenu = () => {
         </div>
         <div className="form-row">
           <input type="number" placeholder="Price" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required />
-          <input placeholder="Image URL (optional)" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
+          <input placeholder="Image" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
         </div>
         <textarea placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
         <label className="checkbox-label">
@@ -79,7 +79,7 @@ const AdminMenu = () => {
               <td>{item.name}</td>
               <td>{item.category}</td>
               <td>₹{item.price}</td>
-              <td>{item.available ? '✅' : '❌'}</td>
+              <td>{item.available ? 'Yes' : 'No'}</td>
               <td>
                 <button className="btn-sm" onClick={() => handleEdit(item)}>Edit</button>
                 <button className="btn-danger-sm" onClick={() => handleDelete(item._id)}>Delete</button>

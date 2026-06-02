@@ -8,9 +8,9 @@ const MyOrders = () => {
   const [orders, setOrders] = useState([])
 
   useEffect(() => {
-    api.get('/orders/my').then(({ data }) => setOrders(data))
+    api.get('/api/orders/my').then(({ data }) => setOrders(data))
     const interval = setInterval(() => {
-      api.get('/orders/my').then(({ data }) => setOrders(data))
+      api.get('/api/orders/my').then(({ data }) => setOrders(data))
     }, 10000)
     return () => clearInterval(interval)
   }, [])
